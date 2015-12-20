@@ -37,11 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <h3>请您登录</h3>
 	      <div class="form-group">
               <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-ul fa-user"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input type="text" name="customer.name" class="form-control" placeholder="请输入用户名" required>
               </div>
                <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                 <input type="password" name="customer.password" class="form-control" placeholder="请输入密码" required>
               </div>
           </div>

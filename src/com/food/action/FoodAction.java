@@ -71,33 +71,25 @@ public class FoodAction extends ActionSupport{
 	public String addFood() throws Exception{
 		
 		 String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+		 
          /*处理图片上传*/
-         String FoodFileName = ""; 
-    	 	if(food.getFilepath()!= null) {
-    	 		InputStream is = new FileInputStream(food.getFilepath());
-    			String fileContentType = this.getBookPhotoFileContentType();
-    			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
-    				bookPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
-    			else if(fileContentType.equals("image/gif"))
-    				bookPhotoFileName = UUID.randomUUID().toString() +  ".gif";
-    			else {
-    				ctx.put("error",  java.net.URLEncoder.encode("上传图片格式不正确!","GBK"));
-    				return "error";
-    			}
-    			File file = new File(path, bookPhotoFileName);
-    			OutputStream os = new FileOutputStream(file);
-    			byte[] b = new byte[1024];
-    			int bs = 0;
-    			while ((bs = is.read(b)) > 0) {
-    				os.write(b, 0, bs);
-    			}
-    			is.close();
-    			os.close();
-    	 	}
-         if(bookPhotoFile != null)
-         	book.setBookPhoto("upload/" + bookPhotoFileName);
-         else
-         	book.setBookPhoto("upload/NoImage.jpg");
+    	 if(food.getFilepath()!= null) {
+	 		InputStream is = new FileInputStream(food.getFilepath());
+			File file = new File(path, food.getFilepath());
+			OutputStream os = new FileOutputStream(file);
+			byte[] b = new byte[1024];
+			int bs = 0;
+			while ((bs = is.read(b)) > 0) {
+				os.write(b, 0, bs);
+			}
+			is.close();
+			os.close();
+		   
+    	}
+    	food.setFilepath("upload/" + food.getFilepath()); 
+    	System.out.println(1);
+    	System.out.println(food.getFilepath());
+    	System.out.println(2);
 		foodDao.AddFood(food);
 		return "message";
 		

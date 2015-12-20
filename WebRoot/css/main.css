@@ -218,7 +218,9 @@ main ul li p a.add-order:hover{
 	margin:10px 30px;
 }
 
-
+main h3{
+	text-align:center;
+}
 
 main table{
 	
