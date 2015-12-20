@@ -18,9 +18,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+	
+	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
   </head>
   
   <body>
@@ -29,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <s:hidden name="food.foodid"></s:hidden>
        <s:textfield name="food.foodname" label="美食名称"></s:textfield>
        <s:textfield name="food.unitprice" label="单价"></s:textfield>
+       <s:textfield name="food.filepath" label="图片"></s:textfield>
        <s:submit value="提交"></s:submit>
      </s:form>
   </body>

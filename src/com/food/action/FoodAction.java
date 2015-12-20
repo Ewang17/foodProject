@@ -1,9 +1,16 @@
 package com.food.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -63,7 +70,34 @@ public class FoodAction extends ActionSupport{
 	/*添加Food*/
 	public String addFood() throws Exception{
 		
-		System.out.println(food.getFoodname());
+		 String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+         /*处理图片上传*/
+         String FoodFileName = ""; 
+    	 	if(food.getFilepath()!= null) {
+    	 		InputStream is = new FileInputStream(food.getFilepath());
+    			String fileContentType = this.getBookPhotoFileContentType();
+    			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+    				bookPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+    			else if(fileContentType.equals("image/gif"))
+    				bookPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+    			else {
+    				ctx.put("error",  java.net.URLEncoder.encode("上传图片格式不正确!","GBK"));
+    				return "error";
+    			}
+    			File file = new File(path, bookPhotoFileName);
+    			OutputStream os = new FileOutputStream(file);
+    			byte[] b = new byte[1024];
+    			int bs = 0;
+    			while ((bs = is.read(b)) > 0) {
+    				os.write(b, 0, bs);
+    			}
+    			is.close();
+    			os.close();
+    	 	}
+         if(bookPhotoFile != null)
+         	book.setBookPhoto("upload/" + bookPhotoFileName);
+         else
+         	book.setBookPhoto("upload/NoImage.jpg");
 		foodDao.AddFood(food);
 		return "message";
 		

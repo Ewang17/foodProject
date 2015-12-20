@@ -19,8 +19,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+	
+	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
   </head>
   
@@ -45,11 +48,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <main>
 	    <s:form action="food/food_queryFoods" method="post">
-	      <div class="search-box">
-	         <s:submit value="查 询" cssClass="search-go"></s:submit>
-	         <input class="search" type="text" name="keyWords" placeholder="请输入关键词">
-	      </div>
+            <div class="form-inline search-box">
+              <div class="form-group pull-right mr200">
+                <input class="search-field form-control input-sm" title="关键词" name="keyWords" placeholder="输入关键词...">
+                <button class="btn btn-info btn-sm" type="submit">搜  索</button>
+              </div> 
+            </div>
 	      <ul>
+	      <s:if test="#session.customer.name =='admin'">
+	        <li>		        
+		            <div class="add"><a href="add.jsp"><i class="fa fa-plus"></i> 添加美食</a></div>
+		              <p>点击上面的链接可以添加一种美食</p>		        
+	        </li>
 	        <s:iterator value="foodList" status="status">
 	          <li>
 	             <img src="<%=basePath%><s:property value='filepath'/>">
@@ -58,13 +68,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                  <s:property value="foodname"/>
 	                </a>
 	                <span class="price"> &yen;<s:property value="unitprice"/></span>
+	                <a href="food/food_showEdit?food.foodid=<s:property 
+	                  value='foodid'/>">
+	                  <i class="fa fa-pencil"></i> 
+	                </a>
+	                &nbsp;&nbsp;<a href="food/food_deleteFood?food.foodid=<s:property 
+	                  value='foodid'/>">
+	                  <i class="fa fa-trash"></i> 
+	                </a>
+	             </p>
+	          </li>
+	        </s:iterator>
+	        </s:if>
+	        <s:else>
+	          <s:iterator value="foodList" status="status">
+	          <li>
+	             <img src="<%=basePath%><s:property value='filepath'/>">
+	             <p>
+	                <a href="food/food_showDetail?food.foodid=<s:property value='foodid'/>">
+	                  <s:property value="foodname"/>
+	                </a>
+	                <span class="price"> &yen;<s:property value="unitprice"/></span>
 	                <a href="order/order_addOrder?food.foodid=<s:property 
-	                  value='foodid'/>&customer.name=<s:property value='#session.customer.name'/>" class="add">
+	                  value='foodid'/>&customer.name=<s:property value='#session.customer.name'/>" class="add-order">
 	                  <i class="fa fa-cutlery"></i> 来一份
 	                </a>
 	             </p>
 	          </li>
 	        </s:iterator>
+	        </s:else>
 	      </ul>
 	    </s:form>
 	</main>
