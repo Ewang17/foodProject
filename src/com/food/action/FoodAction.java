@@ -2,6 +2,7 @@ package com.food.action;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,11 +22,16 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller @Scope("prototype")
 public class FoodAction extends ActionSupport{
 	
+	private static final long serialVersionUID = 1L;
+	
 	 /*业务层对象*/
     @Resource FoodDao foodDao;
     
     
     private Food food;
+    private File foodPhoto;
+    private String foodPhotoFileName;
+    private String foodPhotoContentType;
 
 	public Food getFood() {
 		return food;
@@ -35,6 +41,29 @@ public class FoodAction extends ActionSupport{
 		this.food = food;
 	}
 	
+	public File getFoodPhoto() {
+		return foodPhoto;
+	}
+
+	public void setFoodPhoto(File foodPhoto) {
+		this.foodPhoto = foodPhoto;
+	}
+
+	public String getFoodPhotoFileName() {
+		return foodPhotoFileName;
+	}
+
+	public void setFoodPhotoFileName(String foodPhotoFileName) {
+		this.foodPhotoFileName = foodPhotoFileName;
+	}
+
+	public String getFoodPhotoContentType() {
+		return foodPhotoContentType;
+	}
+
+	public void setFoodPhotoContentType(String foodPhotoContentType) {
+		this.foodPhotoContentType = foodPhotoContentType;
+	}
 	private List<Food> foodList;
 	
 	public List<Food> getFoodList() {
@@ -65,31 +94,39 @@ public class FoodAction extends ActionSupport{
 		this.customer = customer;
 	}
 
-	
+
 	
 	/*添加Food*/
 	public String addFood() throws Exception{
-		 System.out.println(1);
-		 String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-		 
-         /*处理图片上传*/
-    	 if(food.getFilepath()!= null) {
-	 		InputStream is = new FileInputStream(food.getFilepath());
-			File file = new File(path, food.getFilepath());
-			OutputStream os = new FileOutputStream(file);
-			byte[] b = new byte[1024];
-			int bs = 0;
-			while ((bs = is.read(b)) > 0) {
-				os.write(b, 0, bs);
-			}
-			is.close();
-			os.close();
-		   
-    	}
-    	food.setFilepath("upload/" + food.getFilepath()); 
-    	System.out.println(1);
-    	System.out.println(food.getFilepath());
-    	System.out.println(2);
+		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+        /*处理图片上传*/
+        String foodPhotoFileName = ""; 
+   	 	if(foodPhoto!= null) {
+   	 		InputStream is = new FileInputStream(foodPhoto);
+   			String fileContentType = this.getFoodPhotoContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, foodPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(foodPhoto != null)
+        	food.setFilepath("upload/" + foodPhotoFileName);
+        else
+        	food.setFilepath("upload/NoImage.jpg");
+        
 		foodDao.AddFood(food);
 		return "message";
 		
@@ -131,7 +168,6 @@ public class FoodAction extends ActionSupport{
     	foodList = foodDao.QueryFoodInfo(keyWords);
         return "show_view";
     }
-
 
 
 

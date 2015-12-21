@@ -26,7 +26,6 @@ public class Customer implements java.io.Serializable {
 	private String address;
 	private String password;
 	private Set<Order> orders = new HashSet<Order>(0);
-	private Set<Order> orders_1 = new HashSet<Order>(0);
 
 	// Constructors
 
@@ -46,7 +45,6 @@ public class Customer implements java.io.Serializable {
 		this.address = address;
 		this.password = password;
 		this.orders = orders;
-		this.orders_1 = orders_1;
 	}
 
 	// Property accessors
@@ -96,15 +94,6 @@ public class Customer implements java.io.Serializable {
 
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Order> getOrders_1() {
-		return this.orders_1;
-	}
-
-	public void setOrders_1(Set<Order> orders_1) {
-		this.orders_1 = orders_1;
 	}
 
 }

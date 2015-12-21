@@ -47,6 +47,7 @@
         	<result name="edit_view">/edit.jsp</result>
         	<result name="delete_message">/delete_message.jsp</result>
         	<result name="edit_message">/edit_message.jsp</result>
+        	<result name="input">/error.jsp</result>
         </action>
 	 </package>
 	 

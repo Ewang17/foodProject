@@ -25,8 +25,7 @@ public class Food implements java.io.Serializable {
 	private String foodname;
 	private Double unitprice;
 	private String filepath;
-	private Set<Order> orders = new HashSet<Order>(0);
-	private Set<Order> orders_1 = new HashSet<Order>(0);
+	private Set<Order> Orders = new HashSet<Order>(0);
 
 	// Constructors
 
@@ -40,13 +39,12 @@ public class Food implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Food(String foodname, Double unitprice, String filepath,Set<Order> orders,
-			Set<Order> orders_1) {
+	public Food(String foodname, Double unitprice, String filepath,
+			Set<Order> Orders) {
 		this.foodname = foodname;
 		this.unitprice = unitprice;
 		this.filepath = filepath;
-		this.orders = orders;
-		this.orders_1 = orders_1;
+		this.Orders = Orders;
 	}
 
 	// Property accessors
@@ -70,14 +68,7 @@ public class Food implements java.io.Serializable {
 	public void setFoodname(String foodname) {
 		this.foodname = foodname;
 	}
-	@Column(name = "filepath", nullable = false, length = 40)
-	public String getFilepath() {
-		return this.filepath;
-	}
 
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
 	@Column(name = "unitprice", precision = 22, scale = 0)
 	public Double getUnitprice() {
 		return this.unitprice;
@@ -87,24 +78,22 @@ public class Food implements java.io.Serializable {
 		this.unitprice = unitprice;
 	}
 
+	@Column(name = "filepath", length = 80)
+	public String getFilepath() {
+		return this.filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "food")
 	public Set<Order> getOrders() {
-		return this.orders;
+		return this.Orders;
 	}
 
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setOrders(Set<Order> Orders) {
+		this.Orders = Orders;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "food")
-	public Set<Order> getOrders_1() {
-		return this.orders_1;
-	}
-
-	public void setOrders_1(Set<Order> orders_1) {
-		this.orders_1 = orders_1;
-	}
-
-	
 
 }

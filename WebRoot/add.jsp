@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <main class="container-fluid">
 	    <div class="row">
 		   <div class="col-md-10">
-		      <s:form action="food/food_addFood" cssClass="form-horizontal">
+		      <s:form action="food/food_addFood" cssClass="form-horizontal" enctype="multipart/form-data">
 		       <div class="panel panel-success">
 			       <div class="panel-heading">
 		               <h4 class="panel-title"> <i class="fa fa-cutlery"></i> 添 加 美 食 </h4>
@@ -70,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			           <div class="form-group">
 			                <label class="control-label col-md-3">美食图片</label>
 			                <div class="col-md-4">
-                              <input type="file" name="food.filepath" class="form-control input-sm" required>
+                              <input type="file" name="foodPhoto" class="form-control input-sm" required>
                             </div>
 			           </div>
 			           <div class="form-group col-md-3">
