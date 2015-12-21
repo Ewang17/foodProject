@@ -69,7 +69,7 @@ public class FoodAction extends ActionSupport{
 	
 	/*添加Food*/
 	public String addFood() throws Exception{
-		
+		 System.out.println(1);
 		 String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
 		 
          /*处理图片上传*/
