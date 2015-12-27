@@ -23,6 +23,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-fileupload.js"></script>
+	
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
   </head>
@@ -70,7 +74,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			           <div class="form-group">
 			                <label class="control-label col-md-3">美食图片</label>
 			                <div class="col-md-4">
-                              <input type="file" name="foodPhoto" class="form-control input-sm" required>
+                              <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                   <img src="<%=basePath%>upload/demoUpload.jpg" alt="" />
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail" 
+                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
+                                </div>
+                                <div>
+                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
+                                   <span class="fileupload-exists">浏览</span><input type="file" name="foodPhoto"/></span>
+                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
+                                </div>
+                              </div>
                             </div>
 			           </div>
 			           <div class="form-group col-md-3">

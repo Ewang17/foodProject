@@ -2,7 +2,6 @@ package com.food.action;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -153,6 +152,35 @@ public class FoodAction extends ActionSupport{
 
     /*编辑food*/
     public String editFood() throws Exception {
+      String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+        /*处理图片上传*/
+      String foodPhotoFileName = ""; 
+   	 	if(foodPhoto!= null) {
+   	 		InputStream is = new FileInputStream(foodPhoto);
+   			String fileContentType = this.getFoodPhotoContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				foodPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, foodPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(foodPhoto != null)
+        	food.setFilepath("upload/" + foodPhotoFileName);
+        else
+        	food.setFilepath("upload/NoImage.jpg");
+        
     	foodDao.UpdateFood(food);
         return "edit_message";
     }
