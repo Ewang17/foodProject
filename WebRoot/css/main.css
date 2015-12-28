@@ -239,6 +239,12 @@ main ul li p a.add-order:hover{
 .control-group.success .fileupload .fileupload-preview{color:#468847;}
 .control-group.success .fileupload .thumbnail{border-color:#468847;}
 
+/*错误输出*/
+.fielderror{
+	margin-left:30px;
+	color:red;
+	font-size:1em;
+}
 main h3{
 	text-align:center;
 }

@@ -14,7 +14,9 @@ import com.food.dao.CustomerDao;
 import com.food.model.Customer;
 import com.opensymphony.xwork2.ActionSupport;
 
+
 @Controller @Scope("prototype")
+
 public class CustomerAction extends ActionSupport implements SessionAware{
 	
 

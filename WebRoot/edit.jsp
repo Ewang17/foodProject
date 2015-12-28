@@ -23,9 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 	
-	<script src="<%=basePath%>js/jquery.min.js"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js"></script>
-	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
+	
 	
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
@@ -55,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <div class="col-md-10">
 		      <s:form action="food/food_editFood" cssClass="form-horizontal" enctype="multipart/form-data">
 		      <s:hidden name="food.foodid"/>
-		       <div class="panel panel-success">
+		      <div class="panel panel-success">
 			       <div class="panel-heading">
 		               <h4 class="panel-title"> <i class="fa fa-cutlery"></i> 编 辑 美 食 信 息</h4>
 		           </div>
@@ -102,5 +100,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 	   </div>
 	</main>
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
   </body>
 </html>

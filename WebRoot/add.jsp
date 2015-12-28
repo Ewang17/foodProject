@@ -98,5 +98,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 	   </div>
 	</main>
+	<script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
   </body>
 </html>

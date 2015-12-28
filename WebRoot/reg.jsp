@@ -32,12 +32,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </header>  
     <main class="bg">
     
-	    <s:form action="customer/customer_reg" method="post" cssClass="login">
+	    <s:form action="customer/customer_reg" method="post" cssClass="login" validate="true">
 	      <h3>注&nbsp;&nbsp;&nbsp;&nbsp;册</h3>
 	      <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" name="customer.name" class="form-control" placeholder="请输入用户名" required>
+                <s:textfield name="customer.name"></s:textfield>
+                <!--<input type="text" name="customer.name" pattern="^[a-zA-Z]\w{5,15}$" class="form-control" placeholder="请输入用户名" required>  -->
+                <!--<input type="email" name="customer.name" class="form-control" placeholder="请输入您的邮箱" required>  -->
+                <!--<input type="text" name="customer.name" class="form-control" placeholder="请输入用户名" required>  -->
               </div>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -45,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                <input type="password" name="customer.address" class="form-control" placeholder="请输入您的地址">
+                <input type="text" name="customer.address" class="form-control" placeholder="请输入您的地址">
               </div>
           </div>
 	      <button type="submit" class="btn btn-success btn-login">注&nbsp;&nbsp;册 </button>
