@@ -112,14 +112,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        regexp: {
 		                            regexp: /^[a-zA-Z0-9_\.]+$/,
 		                            message: '用户名只能包含字母、数字、点、下划线 '
-		                        }
+		                        }	                        
 		                    }
 		                },
 		                'customer.password': {
 		                    validators: {
 		                        notEmpty: {
 		                            message: '密码不得为空'
-		                        }
+		                        },
+		                        different: {
+									field: 'customer.name',
+									message: '密码不能与用户名相同'
+									},
 		                    }
 		                },
 		                'customer.address': {
