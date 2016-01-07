@@ -137,7 +137,7 @@ main ul li p a.add-order:hover{
 	
 	margin:0 auto;
 	width:400px;
-	height:350px;
+	padding:0 30px 30px 30px;
 	background-color: #fff;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
     background-image: -webkit-linear-gradient(top, #fff, #eee);
@@ -214,8 +214,7 @@ main ul li p a.add-order:hover{
 	margin:20px 30px;
 }
 .bg .login .btn-login{
-	width:340px;
-	margin:10px 30px;
+	width:280px;
 }
 /*修改美食信息页面*/
 /* 文件上传*/
